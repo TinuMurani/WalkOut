@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:forms="clr-namespace:SignaturePad.Forms;assembly=SignaturePad.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="WalkOut.Views.WalkOutForm"
+             Title="Walk Outside">
+    <ScrollView>
+        <StackLayout>
+            <Entry Text="{Binding NumePrenume}" />
+            <DatePicker Date="{Binding DataNasterii}" />
+            <Entry Text="{Binding Adresa}" />
+            <Entry Text="{Binding LocDeplasare}" />
+            <Label Text="{Binding ListaLocuriDeplasare}" />
+
+            <Label Text="Motivul deplasarii" />
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding InteresProfesional}" Color="Black"/>
+                <Label Text="1. Interes profesional, inclusiv intre locuinta/gospodarie si locul/locurile de desfasurare a activitatii profesionale si inapoi"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding AsigurareBunuri}" Color="Black"/>
+                <Label Text="2. Asigurarea de bunuri care acopera necesitatile de baza ale persoanelor si animalelor de companie/domestice"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding AsistenaMedicala}" Color="Black"/>
+                <Label Text="3. Asistenta medicala care nu poate fi amanata si nici realizata de la distanta"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding MotiveJustificate}" Color="Black"/>
+                <Label Text="4. Motive justificate, precum ingrijirea/insotirea unui minor/copilului, asistenta persoanelor varstnice, bolnave sau cu dizabilitati ori deces al unui membru de familie"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding ActivitateFizica}" Color="Black"/>
+                <Label Text="5. Activitate fizica individuala (cu excluderea oricaror activitati sportive de echipa/colective) sau pentru nevoile animalelor de companie/domestice, in apropierea locuintei"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding ActivitatiAgricole}" Color="Black"/>
+                <Label Text="6. Realizarea de activitati agricole"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding DonareSange}" Color="Black"/>
+                <Label Text="7. Donarea de sange, la centrele de transfuzie sanguina"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding ScopuriUmanitare}" Color="Black"/>
+                <Label Text="8. Scopuri umanitare sau de voluntariat"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding ComertAgricole}" Color="Black"/>
+                <Label Text="9. Comercializarea de produse agroalimentare (in cazul producatorilor agricoli)"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding BunuriActivitateProfesionala}" Color="Black"/>
+                <Label Text="10. Asigurarea de bunuri necesare desfasurarii activitatii profesionale"/>
+            </StackLayout>
+
+            <StackLayout>
+                <Label Text="Data" />
+                <DatePicker Date="{Binding DataDeplasarii}" />
+            </StackLayout>
+
+            <StackLayout BackgroundColor="White">
+                <forms:SignaturePadView StrokeColor="Black" BackgroundColor="Transparent" StrokeWidth="3"
+                                        WidthRequest="250" HeightRequest="150" CaptionText="Semnati deasupra liniei"
+                                        ClearText="Sterge semnatura" x:Name="Semnatura"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

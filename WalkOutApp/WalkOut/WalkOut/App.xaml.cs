@@ -30,6 +30,7 @@ namespace WalkOut
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<WalkOutForm, WalkOutFormViewModel>();
         }
     }
 }

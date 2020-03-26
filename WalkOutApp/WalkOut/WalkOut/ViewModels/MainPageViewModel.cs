@@ -10,10 +10,21 @@ namespace WalkOut.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public MainPageViewModel(INavigationService navigationService)
-            : base(navigationService)
+        private readonly INavigationService _navigationService;
+        private DelegateCommand _openForm;
+        
+        public MainPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "Main Page";
+            Title = "Walk Outside";
+            _navigationService = navigationService;
+        }
+
+
+        public DelegateCommand OpenForm => _openForm ?? (_openForm = new DelegateCommand(DeschideFormular));
+
+        private void DeschideFormular()
+        {
+            _navigationService.NavigateAsync("WalkOutForm");
         }
     }
 }
