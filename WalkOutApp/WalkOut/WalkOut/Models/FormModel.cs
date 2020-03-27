@@ -8,11 +8,21 @@ namespace WalkOut.Models
     [Table ("Data")]
     public class FormModel
     {
+        [PrimaryKey, NotNull, AutoIncrement]
         public int Id { get; set; }
+
+        [NotNull]
         public string NumePrenume { get; set; }
-        public DateTime DataNasterii { get; set; }
+        
+        [NotNull]
+        public string DataNasterii { get; set; }
+        
+        [NotNull]
         public string Adresa { get; set; }
-        public string ListaLocDeplasare { get; set; }
+        
+        [NotNull]
+        public string LocDeplasare { get; set; }
+        
         public bool InteresProfesional { get; set; }
         public bool AsigurareBunuri { get; set; }
         public bool AsistentaMedicala { get; set; }
@@ -23,6 +33,8 @@ namespace WalkOut.Models
         public bool ScopuriUmanitare { get; set; }
         public bool ComertAgricole { get; set; }
         public bool BunuriActivitateProfesionala { get; set; }
-        public DateTime DataDeplasarii { get; set; }
+        
+        [NotNull]
+        public string DataDeplasarii { get; set; }
     }
 }
