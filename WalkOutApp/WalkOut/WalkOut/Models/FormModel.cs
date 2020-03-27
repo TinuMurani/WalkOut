@@ -33,7 +33,7 @@ namespace WalkOut.Models
         public bool ScopuriUmanitare { get; set; }
         public bool ComertAgricole { get; set; }
         public bool BunuriActivitateProfesionala { get; set; }
-        
+
         [NotNull]
         public string DataDeplasarii { get; set; }
     }

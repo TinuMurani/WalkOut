@@ -1,8 +1,10 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WalkOut.Models;
 
 namespace WalkOut.ViewModels
 {
@@ -23,11 +25,30 @@ namespace WalkOut.ViewModels
         private bool _scopuriUmanitare;
         private bool _comertAgricole;
         private bool _bunuriActivitateProfesionala;
-        private string _dataDeplasarii;
+        private string _dataDeplasarii = Common.CommonMethods.DateToString(DateTime.Now);
+        private DelegateCommand _saveForm;
 
         public WalkOutFormViewModel()
         {
+            bool check = SqlDataAccess.SqlCommands.VerificareFormular();
 
+            if (check)
+            {
+                NumePrenume = SqlDataAccess.SqlCommands.SelectForm()[0].NumePrenume;
+                DataNasterii = SqlDataAccess.SqlCommands.SelectForm()[0].DataNasterii;
+                Adresa = SqlDataAccess.SqlCommands.SelectForm()[0].Adresa;
+                LocDeplasare = SqlDataAccess.SqlCommands.SelectForm()[0].LocDeplasare;
+                InteresProfesional = SqlDataAccess.SqlCommands.SelectForm()[0].InteresProfesional;
+                AsigurareBunuri = SqlDataAccess.SqlCommands.SelectForm()[0].AsigurareBunuri;
+                AsistentaMedicala = SqlDataAccess.SqlCommands.SelectForm()[0].AsistentaMedicala;
+                MotiveJustificate = SqlDataAccess.SqlCommands.SelectForm()[0].MotiveJustificate;
+                ActivitateFizica = SqlDataAccess.SqlCommands.SelectForm()[0].ActivitateFizica;
+                ActivitatiAgricole = SqlDataAccess.SqlCommands.SelectForm()[0].ActivitatiAgricole;
+                DonareSange = SqlDataAccess.SqlCommands.SelectForm()[0].DonareSange;
+                ScopuriUmanitare = SqlDataAccess.SqlCommands.SelectForm()[0].ScopuriUmanitare;
+                ComertAgricole = SqlDataAccess.SqlCommands.SelectForm()[0].ComertAgricole;
+                BunuriActivitateProfesionala = SqlDataAccess.SqlCommands.SelectForm()[0].BunuriActivitateProfesionala;
+            }
         }
 
         public int Id
@@ -43,7 +64,7 @@ namespace WalkOut.ViewModels
         public string NumePrenume
         {
             get { return _numePrenume; }
-            set 
+            set
             {
                 _numePrenume = value;
                 RaisePropertyChanged(nameof(NumePrenume));
@@ -53,7 +74,7 @@ namespace WalkOut.ViewModels
         public string DataNasterii
         {
             get { return _dataNasterii; }
-            set 
+            set
             {
                 _dataNasterii = value;
                 RaisePropertyChanged(nameof(DataNasterii));
@@ -63,7 +84,7 @@ namespace WalkOut.ViewModels
         public string Adresa
         {
             get { return _adresa; }
-            set 
+            set
             {
                 _adresa = value;
                 RaisePropertyChanged(nameof(Adresa));
@@ -73,7 +94,7 @@ namespace WalkOut.ViewModels
         public string LocDeplasare
         {
             get { return _locDeplasare; }
-            set 
+            set
             {
                 _locDeplasare = value;
                 RaisePropertyChanged(nameof(LocDeplasare));
@@ -93,7 +114,7 @@ namespace WalkOut.ViewModels
         public bool AsigurareBunuri
         {
             get { return _asigurareBunuri; }
-            set 
+            set
             {
                 _asigurareBunuri = value;
                 RaisePropertyChanged(nameof(AsigurareBunuri));
@@ -103,7 +124,7 @@ namespace WalkOut.ViewModels
         public bool AsistentaMedicala
         {
             get { return _asistentaMedicala; }
-            set 
+            set
             {
                 _asistentaMedicala = value;
                 RaisePropertyChanged(nameof(AsistentaMedicala));
@@ -113,7 +134,7 @@ namespace WalkOut.ViewModels
         public bool MotiveJustificate
         {
             get { return _motiveJustificate; }
-            set 
+            set
             {
                 _motiveJustificate = value;
                 RaisePropertyChanged(nameof(MotiveJustificate));
@@ -133,7 +154,7 @@ namespace WalkOut.ViewModels
         public bool ActivitatiAgricole
         {
             get { return _activitatiAgricole; }
-            set 
+            set
             {
                 _activitatiAgricole = value;
                 RaisePropertyChanged(nameof(ActivitatiAgricole));
@@ -143,7 +164,7 @@ namespace WalkOut.ViewModels
         public bool DonareSange
         {
             get { return _donareSange; }
-            set 
+            set
             {
                 _donareSange = value;
                 RaisePropertyChanged(nameof(DonareSange));
@@ -153,7 +174,7 @@ namespace WalkOut.ViewModels
         public bool ScopuriUmanitare
         {
             get { return _scopuriUmanitare; }
-            set 
+            set
             {
                 _scopuriUmanitare = value;
                 RaisePropertyChanged(nameof(ScopuriUmanitare));
@@ -163,7 +184,7 @@ namespace WalkOut.ViewModels
         public bool ComertAgricole
         {
             get { return _comertAgricole; }
-            set 
+            set
             {
                 _comertAgricole = value;
                 RaisePropertyChanged(nameof(ComertAgricole));
@@ -173,7 +194,7 @@ namespace WalkOut.ViewModels
         public bool BunuriActivitateProfesionala
         {
             get { return _bunuriActivitateProfesionala; }
-            set 
+            set
             {
                 _bunuriActivitateProfesionala = value;
                 RaisePropertyChanged(nameof(BunuriActivitateProfesionala));
@@ -183,12 +204,38 @@ namespace WalkOut.ViewModels
         public string DataDeplasarii
         {
             get { return _dataDeplasarii; }
-            set 
-            { 
-                _dataDeplasarii = value;
+            set
+            {
+                _dataDeplasarii = Common.CommonMethods.DateToString(DateTime.Now);
                 RaisePropertyChanged(nameof(DataDeplasarii));
             }
         }
 
+        public DelegateCommand SaveForm => _saveForm ?? (_saveForm = new DelegateCommand(SalvareFormular));
+
+        private void SalvareFormular()
+        {
+            FormModel form = new FormModel()
+            {
+                Id = Id,
+                NumePrenume = NumePrenume,
+                DataNasterii = DataNasterii,
+                Adresa = Adresa,
+                LocDeplasare = LocDeplasare,
+                InteresProfesional = InteresProfesional,
+                AsigurareBunuri = AsigurareBunuri,
+                AsistentaMedicala = AsistentaMedicala,
+                MotiveJustificate = MotiveJustificate,
+                ActivitateFizica = ActivitateFizica,
+                ActivitatiAgricole = ActivitatiAgricole,
+                DonareSange = DonareSange,
+                ScopuriUmanitare = ScopuriUmanitare,
+                ComertAgricole = ComertAgricole,
+                BunuriActivitateProfesionala = BunuriActivitateProfesionala,
+                DataDeplasarii = DataDeplasarii
+            };
+
+            SqlDataAccess.SqlCommands.SaveForm(form);
+        }
     }
 }

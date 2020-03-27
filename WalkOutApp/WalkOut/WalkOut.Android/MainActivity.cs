@@ -22,7 +22,7 @@ namespace WalkOut.Droid
 
         public void OnPermissionGranted(PermissionGrantedResponse p0)
         {
-            Toast.MakeText(this, "Permission granted", ToastLength.Short).Show();
+            
         }
 
         public void OnPermissionRationaleShouldBeShown(PermissionRequest p0, IPermissionToken p1)

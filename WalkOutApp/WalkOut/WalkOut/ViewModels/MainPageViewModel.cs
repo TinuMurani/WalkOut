@@ -24,6 +24,8 @@ namespace WalkOut.ViewModels
 
         private void DeschideFormular()
         {
+            SqlDataAccess.SqlCommands.CreateExternalFolder();
+            SqlDataAccess.SqlCommands.CreateDB();
             _navigationService.NavigateAsync("WalkOutForm");
         }
     }
