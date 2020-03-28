@@ -59,7 +59,7 @@ namespace WalkOut.Droid.PrintService
 
                 iTextSharp.text.Font boldFont = new iTextSharp.text.Font(fontName, 10.0f, iTextSharp.text.Font.BOLD, fontColor);
                 iTextSharp.text.Font standardFont = new iTextSharp.text.Font(fontName, 10.0f, iTextSharp.text.Font.NORMAL, fontColor);
-                iTextSharp.text.Font titleFont = new iTextSharp.text.Font(fontName, 16.0f, iTextSharp.text.Font.NORMAL, fontColor);
+                iTextSharp.text.Font titleFont = new iTextSharp.text.Font(fontName, 16.0f, iTextSharp.text.Font.BOLD, fontColor);
                 iTextSharp.text.Font paragraphFont = new iTextSharp.text.Font(fontName, 10.0f, iTextSharp.text.Font.NORMAL, fontColor);
                 iTextSharp.text.Font spaceFont = new iTextSharp.text.Font(fontName, 6.0f, iTextSharp.text.Font.NORMAL, fontColor);
 

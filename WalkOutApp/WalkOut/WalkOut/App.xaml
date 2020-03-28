@@ -19,10 +19,23 @@
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
+            <Style x:Key="CustomSmallLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Wheat" />
+                <Setter Property="FontSize" Value="Micro" />
+                <Setter Property="VerticalOptions" Value="StartAndExpand" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="CustomHelpLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="VerticalOptions" Value="StartAndExpand" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
             <Style x:Key="CustomEntry" TargetType="Entry">
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="PlaceholderColor" Value="Black" />
                 <Setter Property="Keyboard" Value="Chat" />
+                <Setter Property="IsTextPredictionEnabled" Value="false" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

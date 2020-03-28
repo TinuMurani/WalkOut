@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="WalkOut.Views.HelpPage"
+             Title="Instructiuni completare"
+             BackgroundColor="#11A378">
+    <ScrollView>
+        <StackLayout VerticalOptions="StartAndExpand">
+            <Label Text="Campurile 'Nume, prenume', 'Data nasterii', 'Adresa' si 'Locurile de deplasare' sunt obligatorii."
+                   Style="{StaticResource Key=CustomHelpLabel}" Margin="10,0,10,10"/>
+            
+            <Label Text="Trebuie sa selectezi cel putin un motiv pentru deplasare."
+                   Style="{StaticResource Key=CustomHelpLabel}" Margin="10,0,10,10"/>
+            
+            <Label Text="Dupa completarea datelor personale si selectarea motivelor, semneaza-te si Salveaza semnatura."
+                   Style="{StaticResource Key=CustomHelpLabel}" Margin="10,0,10,0"/>
+            
+            <Label Text="Ultima semnatura salvata se incarca automat pe declaratie." 
+                   Style="{StaticResource Key=CustomHelpLabel}" Margin="10,0,10,10"/>
+            
+            <Label Text="Pentru a genera declaratia pentru alte persoane, trebuie completate toate campurile si salvata o noua semnatura."
+                   Style="{StaticResource Key=CustomHelpLabel}" Margin="10,0,10,10"/>
+
+            <Label Text="Datele personale si motivele deplasarii se salveaza cu icoana din Toolbar."
+                   Style="{StaticResource Key=CustomHelpLabel}" Margin="10,0,10,10"/>
+
+            <Label Text="Dupa salvarea datelor personale, a motivelor si a semnaturii, deschide PDF-ul cu icoana din toolbar."
+                   Style="{StaticResource Key=CustomHelpLabel}" Margin="10,0,10,10"/>
+
+            <Label Text="Daca in previzualizarea PDF-ului nu apare butonul verde deschis rotund, de export in PDF, selecteaza 'Save as PDF' din lista 'Select printer' din partea superioara a paginii."
+                   Style="{StaticResource Key=CustomHelpLabel}" Margin="10,0,10,10"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

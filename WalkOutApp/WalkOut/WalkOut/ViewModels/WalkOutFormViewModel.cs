@@ -14,6 +14,7 @@ namespace WalkOut.ViewModels
 {
     public class WalkOutFormViewModel : BindableBase
     {
+        private readonly INavigationService _navigationService;
         private readonly IPageDialogService _pageDialogService;
         private int _id = 1;
         private string _numePrenume;
@@ -34,8 +35,9 @@ namespace WalkOut.ViewModels
         private DelegateCommand _saveForm;
         private DelegateCommand _loadPDF;
         private DelegateCommand _salvareSemnatura;
+        private DelegateCommand _openHelp;
 
-        public WalkOutFormViewModel(IPageDialogService pageDialogService)
+        public WalkOutFormViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
         {
             if (SqlDataAccess.SqlCommands.VerificareFormular())
             {
@@ -54,7 +56,7 @@ namespace WalkOut.ViewModels
                 ComertAgricole = SqlDataAccess.SqlCommands.SelectForm()[0].ComertAgricole;
                 BunuriActivitateProfesionala = SqlDataAccess.SqlCommands.SelectForm()[0].BunuriActivitateProfesionala;
             }
-
+            _navigationService = navigationService;
             _pageDialogService = pageDialogService;
         }
 
@@ -331,6 +333,13 @@ namespace WalkOut.ViewModels
             {
                 await _pageDialogService.DisplayAlertAsync("Well shit...", ex.Message, "OK");
             }
+        }
+
+        public DelegateCommand OpenHelp => _openHelp ?? (_openHelp = new DelegateCommand(DeschideAjutor));
+
+        private void DeschideAjutor()
+        {
+            _navigationService.NavigateAsync("HelpPage");
         }
     }
 }

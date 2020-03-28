@@ -8,6 +8,7 @@
              Title="Declaratie"
              BackgroundColor="#11A378">
     <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_action_help_outline.png" Command="{Binding OpenHelp}" />
         <ToolbarItem IconImageSource="ic_action_save.png" Command="{Binding SaveForm}" />
         <ToolbarItem IconImageSource="ic_action_picture_as_pdf.png" Command="{Binding LoadPDF}" />
     </ContentPage.ToolbarItems>
@@ -19,7 +20,7 @@
             <Entry Text="{Binding Adresa}" Placeholder="Adresa" Style="{StaticResource Key=CustomEntry}"/>
             <Entry Text="{Binding LocDeplasare}" Placeholder="Locurile de deplasare" Style="{StaticResource Key=CustomEntry}" />
 
-            <Label Text="Motivul deplasarii" Style="{StaticResource Key=CustomLabel}" Margin="10,10,0,0"/>
+            <Label Text="Motivul deplasarii (selecteaza cel putin un motiv)" Style="{StaticResource Key=CustomLabel}" Margin="10,10,0,0"/>
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10" HorizontalOptions="FillAndExpand">
                 <CheckBox IsChecked="{Binding InteresProfesional}" Color="White"/>
                 <Label Text="1. Interes profesional, inclusiv intre locuinta/gospodarie si locul/locurile de desfasurare a activitatii profesionale si inapoi"
@@ -90,7 +91,8 @@
                 <forms:SignaturePadView StrokeColor="Black" BackgroundColor="Transparent" StrokeWidth="3"
                                         WidthRequest="250" HeightRequest="150" CaptionText="Semnati deasupra liniei"
                                         ClearText="Sterge semnatura" x:Name="Semnatura" />
-                <Button Text="Salvare semnatura" Command="{Binding SalvareSemnatura}"/>
+                <Button Text="Salveaza semnatura" Command="{Binding SalvareSemnatura}" BackgroundColor="Green" 
+                        TextColor="White" Margin="10"/>
             </StackLayout>
             
         </StackLayout>
