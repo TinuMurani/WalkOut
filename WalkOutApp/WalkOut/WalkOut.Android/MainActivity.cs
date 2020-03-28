@@ -14,7 +14,7 @@ using WalkOut.Droid.PrintService;
 
 namespace WalkOut.Droid
 {
-    [Activity(Label = "WalkOut", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "WalkOut", Icon = "@drawable/ic_icon_launcher", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IPermissionListener
     {
         internal static Context AppContext;
