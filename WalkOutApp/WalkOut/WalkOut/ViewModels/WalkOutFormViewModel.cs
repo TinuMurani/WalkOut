@@ -1,15 +1,20 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using WalkOut.Common;
 using WalkOut.Models;
 
 namespace WalkOut.ViewModels
 {
     public class WalkOutFormViewModel : BindableBase
     {
+        private readonly IPageDialogService _pageDialogService;
         private int _id = 1;
         private string _numePrenume;
         private string _dataNasterii;
@@ -25,14 +30,14 @@ namespace WalkOut.ViewModels
         private bool _scopuriUmanitare;
         private bool _comertAgricole;
         private bool _bunuriActivitateProfesionala;
-        private string _dataDeplasarii = Common.CommonMethods.DateToString(DateTime.Now);
+        private string _dataDeclaratiei = Common.CommonMethods.DateToString(DateTime.Now);
         private DelegateCommand _saveForm;
+        private DelegateCommand _loadPDF;
+        private DelegateCommand _salvareSemnatura;
 
-        public WalkOutFormViewModel()
+        public WalkOutFormViewModel(IPageDialogService pageDialogService)
         {
-            bool check = SqlDataAccess.SqlCommands.VerificareFormular();
-
-            if (check)
+            if (SqlDataAccess.SqlCommands.VerificareFormular())
             {
                 NumePrenume = SqlDataAccess.SqlCommands.SelectForm()[0].NumePrenume;
                 DataNasterii = SqlDataAccess.SqlCommands.SelectForm()[0].DataNasterii;
@@ -49,6 +54,8 @@ namespace WalkOut.ViewModels
                 ComertAgricole = SqlDataAccess.SqlCommands.SelectForm()[0].ComertAgricole;
                 BunuriActivitateProfesionala = SqlDataAccess.SqlCommands.SelectForm()[0].BunuriActivitateProfesionala;
             }
+
+            _pageDialogService = pageDialogService;
         }
 
         public int Id
@@ -201,13 +208,13 @@ namespace WalkOut.ViewModels
             }
         }
 
-        public string DataDeplasarii
+        public string DataDeclaratiei
         {
-            get { return _dataDeplasarii; }
+            get { return _dataDeclaratiei; }
             set
             {
-                _dataDeplasarii = Common.CommonMethods.DateToString(DateTime.Now);
-                RaisePropertyChanged(nameof(DataDeplasarii));
+                _dataDeclaratiei = Common.CommonMethods.DateToString(DateTime.Now);
+                RaisePropertyChanged(nameof(DataDeclaratiei));
             }
         }
 
@@ -215,27 +222,115 @@ namespace WalkOut.ViewModels
 
         private void SalvareFormular()
         {
-            FormModel form = new FormModel()
+            if (ValidareFormular())
             {
-                Id = Id,
-                NumePrenume = NumePrenume,
-                DataNasterii = DataNasterii,
-                Adresa = Adresa,
-                LocDeplasare = LocDeplasare,
-                InteresProfesional = InteresProfesional,
-                AsigurareBunuri = AsigurareBunuri,
-                AsistentaMedicala = AsistentaMedicala,
-                MotiveJustificate = MotiveJustificate,
-                ActivitateFizica = ActivitateFizica,
-                ActivitatiAgricole = ActivitatiAgricole,
-                DonareSange = DonareSange,
-                ScopuriUmanitare = ScopuriUmanitare,
-                ComertAgricole = ComertAgricole,
-                BunuriActivitateProfesionala = BunuriActivitateProfesionala,
-                DataDeplasarii = DataDeplasarii
-            };
 
-            SqlDataAccess.SqlCommands.SaveForm(form);
+                FormModel form = new FormModel()
+                {
+                    Id = Id,
+                    NumePrenume = NumePrenume.Trim(),
+                    DataNasterii = DataNasterii.Trim(),
+                    Adresa = Adresa.Trim(),
+                    LocDeplasare = LocDeplasare.Trim(),
+                    InteresProfesional = InteresProfesional,
+                    AsigurareBunuri = AsigurareBunuri,
+                    AsistentaMedicala = AsistentaMedicala,
+                    MotiveJustificate = MotiveJustificate,
+                    ActivitateFizica = ActivitateFizica,
+                    ActivitatiAgricole = ActivitatiAgricole,
+                    DonareSange = DonareSange,
+                    ScopuriUmanitare = ScopuriUmanitare,
+                    ComertAgricole = ComertAgricole,
+                    BunuriActivitateProfesionala = BunuriActivitateProfesionala,
+                    DataDeclaratiei = DataDeclaratiei
+                };
+
+                SqlDataAccess.SqlCommands.SaveForm(form);
+            }
+            else
+            {
+                return;
+            } 
+        }
+
+        private bool ValidareFormular()
+        {
+            bool output = false;
+
+            if (InteresProfesional || AsigurareBunuri || AsistentaMedicala
+                || AsistentaMedicala || MotiveJustificate || ActivitateFizica
+                || ActivitatiAgricole || DonareSange || ScopuriUmanitare
+                || ComertAgricole || BunuriActivitateProfesionala) 
+            {
+                output = true;
+            }
+            else
+            {
+                output = false;
+                _pageDialogService.DisplayAlertAsync("Ooops!", "Selecteaza cel putin un tip de activitate", "OK");
+            }
+
+
+            if (string.IsNullOrWhiteSpace(NumePrenume) || string.IsNullOrWhiteSpace(DataNasterii) || string.IsNullOrWhiteSpace(Adresa) ||
+                string.IsNullOrWhiteSpace(LocDeplasare))
+            {
+                output = false;
+                _pageDialogService.DisplayAlertAsync("Ooops!", "Completeaza toate campurile", "OK");
+            }
+            else
+            {
+                output = true;
+            }
+
+            return output;
+        }
+
+        public DelegateCommand LoadPDF => _loadPDF ?? (_loadPDF = new DelegateCommand(GenerarePDF));
+
+        private void GenerarePDF()
+        {
+            FormModel form = new FormModel();
+
+            if (SqlDataAccess.SqlCommands.VerificareFormular()) 
+            {
+                form = SqlDataAccess.SqlCommands.SelectForm()[0];
+            }
+            else
+            {
+                _pageDialogService.DisplayAlertAsync("Ooops!", "Nu ai salvat datele", "OK");
+                return;
+            }
+
+            try
+            {
+                Xamarin.Forms.DependencyService.Get<IPrinterService>().GeneratePDF(form);
+            }
+            catch (Exception ex)
+            {
+                _pageDialogService.DisplayAlertAsync("Uh-Oh!", ex.Message, "OK");
+            }
+        }
+
+        public Func<Task<byte[]>> SignatureFromStream { get; set; }
+        public byte[] Semnatura { get; set; }
+
+        public DelegateCommand SalvareSemnatura => _salvareSemnatura ?? (_salvareSemnatura = new DelegateCommand(SaveSignatureToFile));
+
+        private async void SaveSignatureToFile()
+        {
+            try
+            {
+                Semnatura = await SignatureFromStream();
+
+                if (Semnatura != null)
+                {
+                    ImageConverter.ByteArrayToFile(CommonData._folderPath + "img.png", Semnatura);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _pageDialogService.DisplayAlertAsync("Well shit...", ex.Message, "OK");
+            }
         }
     }
 }

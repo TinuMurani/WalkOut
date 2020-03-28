@@ -1,5 +1,6 @@
 ﻿using Android;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
@@ -9,12 +10,15 @@ using Com.Karumi.Dexter.Listener;
 using Com.Karumi.Dexter.Listener.Single;
 using Prism;
 using Prism.Ioc;
+using WalkOut.Droid.PrintService;
 
 namespace WalkOut.Droid
 {
     [Activity(Label = "WalkOut", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IPermissionListener
     {
+        internal static Context AppContext;
+
         public void OnPermissionDenied(PermissionDeniedResponse p0)
         {
             //throw new System.NotImplementedException();
@@ -44,6 +48,10 @@ namespace WalkOut.Droid
                 .WithPermission(Manifest.Permission.WriteExternalStorage)
                 .WithListener(this)
                 .Check();
+
+            AppContext = this;
+
+            CommonTasks.WriteFileToStorage("calibri.ttf");
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

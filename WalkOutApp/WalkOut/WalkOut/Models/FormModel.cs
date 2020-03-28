@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SQLite;
+﻿using SQLite;
 
 namespace WalkOut.Models
 {
@@ -35,6 +32,6 @@ namespace WalkOut.Models
         public bool BunuriActivitateProfesionala { get; set; }
 
         [NotNull]
-        public string DataDeplasarii { get; set; }
+        public string DataDeclaratiei { get; set; }
     }
 }

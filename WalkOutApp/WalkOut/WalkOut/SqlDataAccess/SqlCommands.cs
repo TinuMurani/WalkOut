@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using SQLite;
 using WalkOut.Models;
 
@@ -9,29 +7,25 @@ namespace WalkOut.SqlDataAccess
 {
     public static class SqlCommands
     {
-        private static readonly string _fileName = "data.db";
-        private static readonly string _folderPath = Android.OS.Environment.ExternalStorageDirectory + Java.IO.File.Separator + "WalkOut" + Java.IO.File.Separator;
-        private static readonly string DbPath = Path.Combine(_folderPath, _fileName);
-
         private static readonly string _selectCommand = "select Id, NumePrenume, DataNasterii, Adresa, LocDeplasare, " +
             "InteresProfesional, AsigurareBunuri, AsistentaMedicala, MotiveJustificate, ActivitateFizica, ActivitatiAgricole, " +
-            "DonareSange, ScopuriUmanitare, ComertAgricole, BunuriActivitateProfesionala from Data where Id=1;";
+            "DonareSange, ScopuriUmanitare, ComertAgricole, BunuriActivitateProfesionala, DataDeclaratiei from Data where Id=1;";
 
         public static void CreateExternalFolder()
         {
-            if (Directory.Exists(_folderPath))
+            if (Directory.Exists(Common.CommonData._folderPath))
             {
                 return;
             }
             else
             {
-                Directory.CreateDirectory(_folderPath);
+                Directory.CreateDirectory(Common.CommonData._folderPath);
             }
         }
 
         public static void CreateDB()
         {
-            using (SQLiteConnection connection = new SQLiteConnection(DbPath))
+            using (SQLiteConnection connection = new SQLiteConnection(Common.CommonData._dbPath))
             {
                 connection.CreateTable<FormModel>();
             }
@@ -39,7 +33,7 @@ namespace WalkOut.SqlDataAccess
 
         public static void SaveForm(FormModel form)
         {
-            using (SQLiteConnection connection = new SQLiteConnection(DbPath))
+            using (SQLiteConnection connection = new SQLiteConnection(Common.CommonData._dbPath))
             {
                 if (SelectForm()?.Count == 0)
                 {
@@ -54,7 +48,7 @@ namespace WalkOut.SqlDataAccess
 
         public static List<FormModel> SelectForm()
         {
-            using (SQLiteConnection connection = new SQLiteConnection(DbPath))
+            using (SQLiteConnection connection = new SQLiteConnection(Common.CommonData._dbPath))
             {
                 var output = connection.Query<FormModel>(_selectCommand);
                 

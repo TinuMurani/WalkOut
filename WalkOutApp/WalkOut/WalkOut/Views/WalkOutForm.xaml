@@ -19,77 +19,77 @@
             <Entry Text="{Binding Adresa}" Placeholder="Adresa" Style="{StaticResource Key=CustomEntry}"/>
             <Entry Text="{Binding LocDeplasare}" Placeholder="Locurile de deplasare" Style="{StaticResource Key=CustomEntry}" />
 
-            <Label Text="Motivul deplasarii" Style="{StaticResource Key=CustomLabel}"/>
-            <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding InteresProfesional}" Color="Black"/>
+            <Label Text="Motivul deplasarii" Style="{StaticResource Key=CustomLabel}" Margin="10,10,0,0"/>
+            <StackLayout Orientation="Horizontal" Margin="0,0,0,10" HorizontalOptions="FillAndExpand">
+                <CheckBox IsChecked="{Binding InteresProfesional}" Color="White"/>
                 <Label Text="1. Interes profesional, inclusiv intre locuinta/gospodarie si locul/locurile de desfasurare a activitatii profesionale si inapoi"
-                       Style="{StaticResource Key=CustomLabel}"/>
+                       Style="{StaticResource Key=CustomLabel}" />
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding AsigurareBunuri}" Color="Black"/>
+                <CheckBox IsChecked="{Binding AsigurareBunuri}" Color="White"/>
                 <Label Text="2. Asigurarea de bunuri care acopera necesitatile de baza ale persoanelor si animalelor de companie/domestice"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding AsistenaMedicala}" Color="Black"/>
+                <CheckBox IsChecked="{Binding AsistentaMedicala}" Color="White"/>
                 <Label Text="3. Asistenta medicala care nu poate fi amanata si nici realizata de la distanta"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding MotiveJustificate}" Color="Black"/>
+                <CheckBox IsChecked="{Binding MotiveJustificate}" Color="White"/>
                 <Label Text="4. Motive justificate, precum ingrijirea/insotirea unui minor/copilului, asistenta persoanelor varstnice, bolnave sau cu dizabilitati ori deces al unui membru de familie"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding ActivitateFizica}" Color="Black"/>
+                <CheckBox IsChecked="{Binding ActivitateFizica}" Color="White"/>
                 <Label Text="5. Activitate fizica individuala (cu excluderea oricaror activitati sportive de echipa/colective) sau pentru nevoile animalelor de companie/domestice, in apropierea locuintei"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding ActivitatiAgricole}" Color="Black"/>
+                <CheckBox IsChecked="{Binding ActivitatiAgricole}" Color="White"/>
                 <Label Text="6. Realizarea de activitati agricole"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding DonareSange}" Color="Black"/>
+                <CheckBox IsChecked="{Binding DonareSange}" Color="White"/>
                 <Label Text="7. Donarea de sange, la centrele de transfuzie sanguina"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding ScopuriUmanitare}" Color="Black"/>
+                <CheckBox IsChecked="{Binding ScopuriUmanitare}" Color="White"/>
                 <Label Text="8. Scopuri umanitare sau de voluntariat"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding ComertAgricole}" Color="Black"/>
+                <CheckBox IsChecked="{Binding ComertAgricole}" Color="White"/>
                 <Label Text="9. Comercializarea de produse agroalimentare (in cazul producatorilor agricoli)"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
             
             <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                <CheckBox IsChecked="{Binding BunuriActivitateProfesionala}" Color="Black"/>
+                <CheckBox IsChecked="{Binding BunuriActivitateProfesionala}" Color="White"/>
                 <Label Text="10. Asigurarea de bunuri necesare desfasurarii activitatii profesionale"
                        Style="{StaticResource Key=CustomLabel}"/>
             </StackLayout>
 
             <StackLayout Margin="0,0,0,10">
                 <Label Text="Data" Style="{StaticResource Key=CustomLabel}" HorizontalOptions="Center"/>
-                <Label Text="{Binding DataDeplasarii}" Style="{StaticResource Key=CustomLabel}" 
+                <Label Text="{Binding DataDeclaratiei}" Style="{StaticResource Key=CustomLabel}" 
                        HorizontalOptions="Center" VerticalOptions="Start" TextColor="White" FontAttributes="Bold"/>
             </StackLayout>
 
             <StackLayout BackgroundColor="White">
                 <forms:SignaturePadView StrokeColor="Black" BackgroundColor="Transparent" StrokeWidth="3"
                                         WidthRequest="250" HeightRequest="150" CaptionText="Semnati deasupra liniei"
-                                        ClearText="Sterge semnatura" x:Name="Semnatura"/>
+                                        ClearText="Sterge semnatura" x:Name="Semnatura" />
                 <Button Text="Salvare semnatura" Command="{Binding SalvareSemnatura}"/>
             </StackLayout>
             

@@ -6,7 +6,7 @@
              BackgroundColor="#11A378">
 
     <StackLayout>
-        <Button Text="Hai afara!"  Command="{Binding OpenForm}" FontSize="Large"
+        <Button ImageSource="ic_go_out.png"  Command="{Binding OpenForm}" FontSize="Large" BackgroundColor="#11A378" Scale="0.5"
                 HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="250" WidthRequest="250"/>
     </StackLayout>
 
