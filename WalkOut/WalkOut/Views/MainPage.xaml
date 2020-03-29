@@ -5,9 +5,13 @@
              Title="{Binding Title}"
              BackgroundColor="#11A378">
 
-    <StackLayout>
-        <Button ImageSource="ic_go_out.png"  Command="{Binding OpenForm}" FontSize="Large" BackgroundColor="#11A378" Scale="0.5"
-                HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="250" WidthRequest="250"/>
+    <StackLayout VerticalOptions="CenterAndExpand">
+        <Label Text="Aceasta aplicatie este gratuita, nu contine ad-uri, salveaza datele pe dispozitiv si nu transmite informatii online." 
+               FontFamily="AllertaStencil-Regular.ttf#Allerta Stencil" HorizontalTextAlignment="Center" FontSize="Small" TextColor="White"/>
+        <Label Text="Apasa 'go out' pentru a continua." 
+            FontFamily="AllertaStencil-Regular.ttf#Allerta Stencil" HorizontalTextAlignment="Center" FontSize="Small" TextColor="White"/>
+        <Button ImageSource="ic_go_out.png" Command="{Binding OpenForm}" BackgroundColor="#11A378" Scale="0.5" 
+                HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" HeightRequest="150" WidthRequest="250"/>
     </StackLayout>
 
 </ContentPage>

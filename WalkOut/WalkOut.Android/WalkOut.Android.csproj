@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\calibri.ttf" />
+    <AndroidAsset Include="Assets\AllertaStencil-Regular.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
