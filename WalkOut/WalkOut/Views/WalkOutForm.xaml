@@ -88,7 +88,7 @@
             </StackLayout>
 
             <StackLayout BackgroundColor="White">
-                <forms:SignaturePadView StrokeColor="Black" BackgroundColor="Transparent" StrokeWidth="3"
+                <forms:SignaturePadView StrokeColor="#141671" BackgroundColor="Transparent" StrokeWidth="3"
                                         WidthRequest="250" HeightRequest="150" CaptionText="Semnati deasupra liniei"
                                         ClearText="Sterge semnatura" x:Name="Semnatura" />
                 <Button Text="Salveaza semnatura" Command="{Binding SalvareSemnatura}" BackgroundColor="Green" 
