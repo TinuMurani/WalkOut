@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Print;
-using Android.Runtime;
 using Android.Util;
-using Android.Views;
-using Android.Widget;
 using Java.IO;
 
 namespace WalkOut.Droid.PrintService
